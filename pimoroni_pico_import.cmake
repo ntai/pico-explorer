@@ -2,7 +2,14 @@
 # It will also set up the required include and module search paths.
 
 if (NOT PIMORONI_PICO_PATH)
-    set(PIMORONI_PICO_PATH "../../pimoroni-pico/")
+    if (PICO_SDK_PATH AND EXISTS "${PICO_SDK_PATH}/../pimoroni-pico")
+        set(PIMORONI_PICO_PATH ${PICO_SDK_PATH}/../pimoroni-pico)
+        message("Defaulting PIMORONI_PICO_PATH as sibling of PICO_SDK_PATH: ${PIMORONI_PICO_PATH}")
+    elseif(EXISTS "${CMAKE_CURRENT_BINARY_DIR}/../../pimoroni-pico/")
+        set(PIMORONI_PICO_PATH ${CMAKE_CURRENT_BINARY_DIR}/../../pimoroni-pico/)
+    else()
+        message(FATAL_ERROR "Pimoroni Pico location was not specified. Please set PIMORONI_PICO_PATH.")
+    endif()
 endif()
 
 if(NOT IS_ABSOLUTE ${PIMORONI_PICO_PATH})

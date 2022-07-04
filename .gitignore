@@ -1,1 +1,13 @@
-build/*
+cmake-build-debug/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+elf2uf2/
+generated/
+pico-sdk/
+Testing/
+CMakeFiles/
+.cmake/
+.idea/
+.vscode/
+
